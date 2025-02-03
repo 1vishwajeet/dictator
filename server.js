@@ -5,11 +5,7 @@ import cors from 'cors';
 
 dotenv.config();
 
-// Validate environment variables
-if (!process.env.DB) {
-  console.error('Error: DB environment variable is not set.');
-  process.exit(1);
-}
+
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -27,7 +23,7 @@ app.use((req, res, next) => {
 
 // ---- Database Connection ----
 mongoose
-  .connect(DB, {
+  .connect('mongodb+srv://vishwajeeet0994:VGoSF796LkDoMJjt@cluster0.ws863.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -69,7 +65,7 @@ const validateInput = (req, res, next) => {
 };
 
 // ---- POST Endpoint ----
-app.post('/api/v1/data', validateInput, async (req, res) => {
+app.post('/', validateInput, async (req, res) => {
   const { email, details } = req.body;
 
   try {
